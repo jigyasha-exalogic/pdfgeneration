@@ -3,22 +3,23 @@ class PayslipsController < ApplicationController
 		@payslip = Payslip.new
 		@user=User.find(params[:id])
 		session[:copy]=@user.id
-
+         
 	end
 
 	def create
 		@error
 		@payslip = Payslip.new(payslip_params)
+		@user=User.find(session[:copy])
 		@sal = Sal.find(session[:copy])
+		@payslip.payslipid = @user.empid << @payslip.month.to_s.rjust(2,"0") << @payslip.year.to_s
 		@payslip.userid = @sal.id
 		@payslip.basic = @sal.basic
 		@payslip.hra = @sal.hra
 		@payslip.cca = @sal.cca
-
 		if @payslip.save
-			redirect_to payslip_path(@payslip)
+			redirect_to "/jig/" << (@payslip.id).to_s
 		else
-			@error = "Please check the data"
+			@error = "Payslip already generated"
 			render "new"
 		end
 	end
@@ -26,11 +27,11 @@ class PayslipsController < ApplicationController
 	def show
 		@payslip=Payslip.find(params[:id])
 		@user=User.find_by(id: @payslip.userid)
+		@sal=Sal.find_by(id: @payslip.userid)
 		@acc=Account.find_by(id: @payslip.userid)
-		
-		@hrac = hrac(@payslip.basic, @payslip.hra)
-		@ccac = ccac(@payslip.basic, @payslip.cca) 
-		@gross = @payslip.basic + @hrac + @ccac + @payslip.reim + @payslip.ta + @payslip.sa
+		@payslip.hra = @payslip.basic * (@sal.hra/100)
+		@payslip.cca = @payslip.basic * (@sal.cca/100)
+		@gross = @payslip.basic + @payslip.hra + @payslip.cca + @payslip.reim + @payslip.ta + @payslip.sa
 		@ptc = ptc(@gross)
 		@lopc = lopc(@payslip.basic, @payslip.lop)
 		@deduction = @ptc + @lopc + @payslip.od
@@ -41,21 +42,15 @@ class PayslipsController < ApplicationController
 		@temp = dict[temp]
 	end
 
+	def index
+		@payslips = Payslip.select(:id,:payslipid, :userid).where(:userid=>params[:id])
+	end
+
 	private
 	
 	def payslip_params
     	params.require(:payslip).permit(:hra, :cca, :basic, :pt, :sa, :ta, :reim,:lop , :od, :month, :year, :payslipid, :userid)
     end
-
-    def hrac(basic, hra)
-    h = basic * (hra/100)
-    return h
-  	end
-
-  	def ccac(basic, cca)
-    c = basic * (cca/100)
-    return c
-  	end
 
   	def ptc(spm)
     pt = 0

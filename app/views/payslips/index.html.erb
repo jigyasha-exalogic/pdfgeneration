@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+	fieldset{margin-left: 300px; margin-right: 300px; border-width: 0px; margin-top: -60px;}
+	td{align-content: left;}
+	table{border-collapse: collapse; width: 100%;}
+	td {padding: 3px;text-align: center;}
+	tr:hover {background-color:#f5f5f5;}
+  a{text-align: left;}
+</style>
+</head>
+<img src="http://www.exalogic.in/wp-content/uploads/2018/08/exalogic.png" alt="Exalogic Solutions">
+<fieldset style="text-align: center;" >
+<body>
+  <div class="sidenav">
+		<% if session[:user_type]=='admin'%>
+    		<a href="/users"><img src="http://www.exalogic.in/wp-content/uploads/2018/08/exalogic.png" alt="Exalogic Solutions" style="width:80%"></a><br>
+    		<a href="/users/new">Employee Registration</a>
+   		 	<a href="http://www.exalogic.in/" target="_blank">About Us</a>
+    		<%= link_to "Logout", logout_path, method: :delete, data: {confirm: "Do you want to logout?"} %>
+		<% else %>
+			<a href="#"><img src="http://www.exalogic.in/wp-content/uploads/2018/08/exalogic.png" alt="Exalogic Solutions" style="width:80%"></a><br>
+			<a href="http://www.exalogic.in/" target="_blank">About Us</a>
+			<%= link_to "Logout", logout_path, method: :delete, data: {confirm: "Do you want to logout?"} %>
+		<% end %>
+  </div>
+  <table > <h2><strong>Payslips</strong></h2>
+  	<th>Employee Name</th><th>Employee ID</th><th>Payslip Month/Year</th><br>
+  	<% @payslips.each do |f| %>
+  		<% user=User.find(f.userid) %>
+  		<% payslip = Payslip.find(f.userid) %>
+	  	<tbody>
+	  		<td><%= user.fname %> <%= user.lname %></td>
+	  		<td><%= user.empid %></td>
+	  		<td><%= payslip.month.to_i %>/<%= payslip.year.to_i%></td>
+	  		<td><%= link_to "Show Payslip", jig_path(f) %></td>
+	  	</tbody>
+  	<% end %>
+  </table>
+
+</script>

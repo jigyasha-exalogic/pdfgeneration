@@ -8,5 +8,8 @@ Rails.application.routes.draw do
   resources :accounts
   resources :payslips, only: [:create, :show]
   get "/payslips/new/:id" => "payslips#new", as: "new_payslip"
+  get "/payslips/:id/all" => "payslips#index", as: "show_all"
+  get "/jig/:id" => "payslips#show", as: "jig"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
 end

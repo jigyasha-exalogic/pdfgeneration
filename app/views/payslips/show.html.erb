@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html>
 
-<fieldset style="background-color: white;margin-left: 280px;"><br>
+<fieldset style="background-color: white;"><br>
 <head>
-  <div class="sidenav">
-      <a href="/users"><img src="http://www.exalogic.in/wp-content/uploads/2018/08/exalogic.png" alt="Exalogic Solutions" style="width:80%"></a><br>
-      <a href="/users/new">Employee Registration</a>
-      <a href="http://www.exalogic.in/" target="_blank">About Us</a>
-      <%= link_to "Logout", logout_path, method: :delete, data: {confirm: "Do you want to logout?"} %>
-  </div>
 <img src="http://www.exalogic.in/wp-content/uploads/2018/08/exalogic.png" alt="exalogic logo" width="150" height="50" style="position: relative;right: : 950px;">
 <center><header style="font-weight: bold;">Exalogic Solutions Pvt Ltd<br></header>22, Ganganagar 1st Main Road, Bangalore-560032 India</center><br><br>
 <hr>
@@ -76,12 +70,12 @@ text-align: left;
 </tr> 
 <tr> 
 <td>HRA</td> 
-<td><%= @hrac.to_i%></td>
+<td><%= @payslip.hra.to_i%></td>
 <td>Loss of Pay</td>
 <td><%= @lopc.to_i%></td>
 <tr> 
 <td>CCA</td> 
-<td><%= @ccac.to_i%></td>
+<td><%= @payslip.cca.to_i%></td>
 <td>Other Deductions</td>
 <td><%= @payslip.od.to_i %></td>
 </tr> 
@@ -135,3 +129,10 @@ text-align: left;
 <center><p style="font-weight: bold; text-decoration: underline;">***This is system generated payslip and does not require signature</p></center>
 </body>
 </fieldset><br>
+  <script>
+function myFunction() {
+window.print();
+button.hide();
+}
+</script>
+<center><button onclick="myFunction()">Print this page</button></center>

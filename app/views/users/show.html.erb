@@ -118,7 +118,8 @@
 <br>
 <% if session[:user_type]=='admin'%>
 	<%= link_to 'Home', users_path, :class => "links" %>&nbsp;&nbsp;
-	<%= link_to 'Edit', edit_user_path(@user), :class => "links" %> 
+	<%= link_to 'Edit', edit_user_path(@user), :class => "links" %>&nbsp;&nbsp;
+	<%= link_to 'View Payslips', show_all_path(@user), :class => "links" %>
 <% end %>
 </body>
 </fieldset>

@@ -5,7 +5,7 @@
     <title></title>
   </head>
   <body>
-    <div class="sidenav">
+   <div class="sidenav">
       <a href="/users"><img src="http://www.exalogic.in/wp-content/uploads/2018/08/exalogic.png" alt="Exalogic Solutions" style="width:80%"></a><br>
       <a href="/users/new">Employee Registration</a>
       <a href="http://www.exalogic.in/" target="_blank">About Us</a>
@@ -29,14 +29,15 @@
       <td><%= f.label "Special Allowance"%></td>
     <td><%= f.number_field :sa, :min => 0%>
    <span style="color:black;"><%= @payslip.errors[:sa][0] rescue nil%></span></td>
+    <td><%= f.label "Reimbursement "%></td>
+    <td><%= f.number_field :reim, :min => 0 %>
+       <span style="color:black;"><%= @payslip.errors[:reim][0] rescue nil%></span></td>
   </tr>
   <tr>
     <td><%= f.label "Transport Allowance "%></td>
     <td><%= f.number_field :ta, :min => 0 %> 
        <span style="color:black;"><%= @payslip.errors[:ta][0] rescue nil%></span></td>
-    <td><%= f.label "Reimbursement "%></td>
-    <td><%= f.number_field :reim, :min => 0 %>
-       <span style="color:black;"><%= @payslip.errors[:reim][0] rescue nil%></span></td>
+   
   </tr>
     <tr>
       <td colspan="4" style="color: #3b5998;"><label><h4><b>DEDUCTIONS</b></h4></label></td>

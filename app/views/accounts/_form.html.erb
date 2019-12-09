@@ -5,7 +5,7 @@
 <td colspan="2"><label><h3>Employee Name: <%= @user.fname %> <%= @user.lname %></h3></label></td>
 <tr>
   <td><%= f.label "Account Number: "%></td>
-    <td><%= f.number_field :acno, :required => true, :min => 10, :max => 12 %> 
+    <td><%= f.number_field :acno, :required => true, :maxlength => 12 %> 
     <span style="color:black;"><%= @sal.errors[:basic][0] rescue nil%></span>
     <td><%= f.label "Account Holders Name: "%></td>
     <td><%= f.text_field :acname, :required => true, :min => 0%>
