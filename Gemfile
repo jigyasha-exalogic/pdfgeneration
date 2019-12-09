@@ -59,7 +59,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #   gem 'pg'
 #   gem 'rails_12factor'
 # end
-gem 'wicked_pdf'
-gem 'jquery-rails'
-gem 'bootstrap', '~> 4.1.3'
-gem 'wkhtmltopdf-binary'
+gem 'prawn'
+gem 'prawn-table'
