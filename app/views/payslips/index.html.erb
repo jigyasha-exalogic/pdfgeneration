@@ -29,7 +29,7 @@
   	<th>Employee Name</th><th>Employee ID</th><th>Payslip Month/Year</th><br>
   	<% @payslips.each do |f| %>
   		<% user=User.find(f.userid) %>
-  		<% payslip = Payslip.find(f.userid) %>
+  		<% payslip = Payslip.find(f.id) %>
 	  	<tbody>
 	  		<td><%= user.fname %> <%= user.lname %></td>
 	  		<td><%= user.empid %></td>
@@ -38,5 +38,3 @@
 	  	</tbody>
   	<% end %>
   </table>
-
-</script>
