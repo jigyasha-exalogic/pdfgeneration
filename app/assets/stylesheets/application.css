@@ -1,0 +1,103 @@
+body {
+  font-family: "Lato", sans-serif;
+  background:   #dfe3ee;
+}
+
+.sidenav {
+  height: 100%;
+  width: 278px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background: #3b5998;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #080334;
+  background-color: #dfe3ee;
+}
+
+.main1 {
+  margin-left: 275px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+.container {
+  border: 2px solid #ccc;
+  background-color: #eee;
+  border-radius: 5px;
+  padding: 16px;
+  margin: 16px 0;
+  height: 130px;
+}
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container img {
+  float: left;
+  margin-top: 10px;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.container span {
+  font-size: 20px;
+  margin-right: 15px;
+}
+
+@media (max-width: 500px) {
+  .container {
+    text-align: center;
+  }
+
+  .container img {
+    margin: auto;
+    float: none;
+    display: block;
+  }
+}
+
+.links{
+       text-decoration: none;
+       border-radius: 5em;
+       background: #c0c5ce;
+       border: none;
+       color: black;
+       padding: 15px 32px;
+       text-align: center;
+       text-decoration: none;
+       display: inline-block;
+       font-size: 13px;
+       font-family: 'Ubuntu', sans-serif;
+       cursor: pointer;
+       line-height: 15px; 
+       font-size: 13px;
+}
+
+.links:hover{
+  font-size: 17px;
+  line-height: 15px;
+  position: relative;
+}

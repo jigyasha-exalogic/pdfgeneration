@@ -1,0 +1,31 @@
+<%= form_for @acc do |f|%>
+<%= hidden_field(:acc, :userid, :value => session[:user_id]) %>
+<fieldset style="margin-left: 400px; margin-right: 300px; border: 0px;">
+<table align = center, width=125%>
+<td colspan="2"><label><h3>Employee Name: <%= @user.fname %> <%= @user.lname %></h3></label></td>
+<tr>
+  <td><%= f.label "Account Number: "%></td>
+    <td><%= f.number_field :acno, :required => true, :min => 10, :max => 12 %> 
+    <span style="color:black;"><%= @sal.errors[:basic][0] rescue nil%></span>
+    <td><%= f.label "Account Holders Name: "%></td>
+    <td><%= f.text_field :acname, :required => true, :min => 0%>
+  </tr>
+  <tr>
+    <td><%= f.label "IFSC Code: "%></td>
+    <td><%= f.text_field :ifsc, :required => true, :min => 0%> 
+     <span style="color:black;"><%= @sal.errors[:cca][0] rescue nil%></span>
+    <td><%= f.label "Bank Name:"%></td>
+    <td><%= f.text_field :bankname, :min => 0%>
+  </tr>
+  <tr>
+    <td><%= f.label "Branch: "%></td>
+    <td><%= f.text_field :branch, :min => 0 %> 
+</table>
+<br>
+<%= link_to 'Home', "/users" , :class => "links"%> &nbsp;&nbsp;
+<% if session[:temp] == "edit" %>
+ <%= link_to 'Back', edit_sal_path(@acc) , :class => "links"%> &nbsp;&nbsp;
+  <% end %>
+<%= f.submit 'Submit', :class => "links"%>
+</fieldset>
+<% end %>

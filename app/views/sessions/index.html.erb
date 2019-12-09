@@ -1,0 +1,26 @@
+<html>
+
+<head>
+  <%= stylesheet_link_tag "new" %>
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login</title>
+  <style> .alert{text-align: center;}
+</style>
+
+</head>
+
+<body>
+  <div class="main">
+    <p class="sign" align="center">Login</p>
+    <form class="form1" action="/sessions" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+      <input class="un " type="email" align="center" placeholder="Username" name="user[email]">
+      <input class="pass" type="password" align="center" placeholder="Password" name="user[password]">
+      <input type="submit" name="submit" value="Login" class="submit"><br><br>
+      <div class = "alert">
+        <span><%= @error1%></span>
+      </div>
+    </div>
+</body>
+</html>

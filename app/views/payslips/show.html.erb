@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<fieldset style="background-color: white;margin-left: 280px;"><br>
+<head>
+  <div class="sidenav">
+      <a href="/users"><img src="http://www.exalogic.in/wp-content/uploads/2018/08/exalogic.png" alt="Exalogic Solutions" style="width:80%"></a><br>
+      <a href="/users/new">Employee Registration</a>
+      <a href="http://www.exalogic.in/" target="_blank">About Us</a>
+      <%= link_to "Logout", logout_path, method: :delete, data: {confirm: "Do you want to logout?"} %>
+  </div>
+<img src="http://www.exalogic.in/wp-content/uploads/2018/08/exalogic.png" alt="exalogic logo" width="150" height="50" style="position: relative;right: : 950px;">
+<center><header style="font-weight: bold;">Exalogic Solutions Pvt Ltd<br></header>22, Ganganagar 1st Main Road, Bangalore-560032 India</center><br><br>
+<hr>
+<center><h1><%= @temp %> <%= @payslip.year.to_i %> Pay Slip </h1></center>
+<hr>
+
+<style> 
+
+th, td { 
+padding: 10px; 
+} 
+
+th { 
+text-align: left; 
+} 
+</style> 
+
+</head>
+<body>
+<table width = 100% >
+<tr>
+<td>
+<strong>Employee id:</strong></td>
+<td><%= (@user.empid).to_i%></td>
+<td>
+<strong>Name:</strong></td>	
+<td><%= @user.fname %>&nbsp;<%= @user.lname%></td>
+</tr>
+<tr>
+<td>
+<strong>Department:</strong></td>
+<td><%= @user.department %></td>
+<td>
+<strong>Designation:</strong></td>
+<td><%= @user.designation %></td>
+</tr>
+<tr>
+<td><strong>Date of Joining:</strong></td>
+<td><%= @user.date_of_joining %></td>
+<td><strong>Account Number:</strong></td>
+<td><%= (@acc.acno).to_i %></td>
+</tr>
+<tr>
+<td><strong>Bank Name:</strong></td>
+<td><%= @acc.bankname %></td>
+<td><strong>IFSC Code:</strong></td>
+<td><%= @acc.ifsc %></td>
+</tr>
+
+</table><br>
+
+<table width=100%, border="1px", style="border-collapse: collapse;"> 
+<caption style="font-weight: bold; text-decoration: underline; font-size: 20px;">DETAILS</caption> 
+<tr> 
+<th style="text-decoration: underline;">Earnings</th> 
+<th style="text-decoration: underline;">Amount</th> 
+<th style="text-decoration: underline;">Deductions</th> 
+<th style="text-decoration: underline;">Amount</th> 
+</tr> 
+<tr> 
+<td>Basic Pay</td> 
+<td><%= @payslip.basic.to_i%></td>
+<td>Professional Tax</td>
+<td><%= @ptc.to_i%></td>
+</tr> 
+<tr> 
+<td>HRA</td> 
+<td><%= @hrac.to_i%></td>
+<td>Loss of Pay</td>
+<td><%= @lopc.to_i%></td>
+<tr> 
+<td>CCA</td> 
+<td><%= @ccac.to_i%></td>
+<td>Other Deductions</td>
+<td><%= @payslip.od.to_i %></td>
+</tr> 
+<tr> 
+<td>Special Allowance</td> 
+<td><%= @payslip.sa.to_i%></td>
+<td></td>
+<td></td>
+</tr> 
+<tr> 
+<td>Transport Allowance</td> 
+<td><%= @payslip.ta.to_i%></td>
+<td></td>
+<td></td>
+
+</tr> 
+<tr> 
+<td>Reimbursement</td> 
+<td><%= @payslip.reim.to_i%></td>
+<td></td>
+<td></td>
+
+</tr> 
+<tr> 
+<td style="font-weight: bold; text-decoration: underline;">Total Earnings</td> 
+<td><%= @gross.to_i%></td>
+<td style="font-weight: bold;text-decoration: underline;">Total Deductions</td>
+<td><%= @deduction.to_i%></td>
+
+</tr> 
+<tr> 
+<td ></td> 
+<td></td>
+<td style="font-weight: bold;text-decoration: underline;">Net Pay</td>
+<td><%= @net.to_i %></td> 
+
+</tr>
+</table>
+<br>
+
+<table >
+
+<tr>
+<td>
+<strong style="text-decoration: underline;">Net Pay</strong> (in words):</td>
+<td>₹ <%=@net.to_i.humanize.capitalize %> only</td>
+</tr>
+</table>
+<br>
+<hr>
+<center><p style="font-weight: bold; text-decoration: underline;">***This is system generated payslip and does not require signature</p></center>
+</body>
+</fieldset><br>

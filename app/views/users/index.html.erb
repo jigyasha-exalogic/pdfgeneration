@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="sidenav">
+  <a href="/users"><img src="http://www.exalogic.in/wp-content/uploads/2018/08/exalogic.png" alt="Exalogic Solutions" style="width:80%"></a><br>
+  <a href="/users/new">Employee Registration</a>
+  <a href="http://www.exalogic.in" target="_blank">About Us</a>
+  <%= link_to "Logout", logout_path, method: :delete, data: {confirm: "Do you want to logout?"} %>
+</div>
+
+<div class="main1">
+  <h3>Employee List</h3>
+  <h5>Number of Employees : <%= @users.count-1 %> </h5>
+  <% @users.each do |f| %>
+      <% unless f.role == "admin"%>
+    <a href="<%= user_path(f) %>" style="text-decoration:none; color:black;">
+      <div class="container">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIqtC7K9hXXGa821c0OkwppyASRCjHj_Pubh9ScF5v9XVC8acGhQ&s" alt="Avatar" style="width:120px">
+        <p><%= f.fname %>&nbsp;<%= f.lname %><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Email:</label>&nbsp;<%= f.email %></span></p>
+        <p><%= link_to 'Show Details', user_path(f),:class => "links"%>&nbsp;&nbsp;<%= link_to 'Edit Details', edit_user_path(f),:class => "links"%>&nbsp;&nbsp;<%= link_to 'Generate Payslip', new_payslip_path(f),:class => "links"%>&nbsp;&nbsp;<%= link_to 'Delete User', user_path(f), method: :delete,data: {confirm: "Are you sure you want to delete the user?"},:class => "links"%></p>
+      </div>
+    </a>
+  <% end %>
+<% end %>
+</div>
+</body>
+</html>

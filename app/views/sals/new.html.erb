@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="sidenav">
+  <a href="/users"><img src="http://www.exalogic.in/wp-content/uploads/2018/08/exalogic.png" alt="Exalogic Solutions" style="width:80%"></a><br>
+  <a href="/users/new">Employee Registration</a>
+  <a href="http://www.exalogic.in" target="_blank">About Us</a>
+  <%= link_to "Logout", logout_path, method: :delete, data: {confirm: "Do you want to logout?"} %>
+</div>
+
+<h2 style="margin-left:650px;">Enter Employee Salary Details</h2>
+    <%= render "form" %>
+</body>
+</html>

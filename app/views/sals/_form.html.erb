@@ -1,0 +1,34 @@
+
+<%= form_for @sal do |f|%>
+<%= hidden_field(:sal, :id, :value => session[:user_id]) %>
+
+<fieldset style="margin-left: 400px; margin-right: 300px; border: 0px;">
+  <% if @sal.errors[:id][0] != nil %>
+  User already created.
+  <% end %>
+<table align = center, width=125%>
+<td colspan="2"><label><h3>Employee Name: <%= @user.fname %> <%= @user.lname %></h3></label></td>
+    <tr>
+      <td colspan="4" style="color: #3b5998;"><label><h4><b>ADDITIONS</b></h4></label></td>
+  </tr>
+  <td><%= f.label "Basic Pay "%></td>
+    <td><%= f.number_field :basic, :required => true, :min => 0 %> 
+    <span style="color:black;"><%= @sal.errors[:basic][0] rescue nil%></span>
+    <td><%= f.label "HRA (in %) "%></td>
+    <td><%= f.number_field :hra, :required => true, :min => 0%>
+    <span style="color:black;"><%= @sal.errors[:hra][0] rescue nil%></span>
+  </tr>
+  <tr>
+    <td><%= f.label "CCA (in %) "%></td>
+    <td><%= f.number_field :cca, :required => true, :min => 0%> 
+     <span style="color:black;"><%= @sal.errors[:cca][0] rescue nil%></span></td>
+   </tr>
+</table>
+<br>
+<%= link_to 'Home', "/users" , :class => "links"%> &nbsp;&nbsp;
+<% if session[:temp] == "edit" %>
+  <%= link_to 'Back', edit_user_path, :class => "links" %>&nbsp;&nbsp;
+  <% end %>
+<%= f.submit 'Next', :class => "links"%>
+</fieldset>
+<% end %>

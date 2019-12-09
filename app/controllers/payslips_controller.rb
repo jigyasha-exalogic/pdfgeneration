@@ -1,0 +1,72 @@
+class PayslipsController < ApplicationController
+	def new
+		@payslip = Payslip.new
+		@user=User.find(params[:id])
+		session[:copy]=@user.id
+
+	end
+
+	def create
+		@error
+		@payslip = Payslip.new(payslip_params)
+		@sal = Sal.find(session[:copy])
+		@payslip.userid = @sal.id
+		@payslip.basic = @sal.basic
+		@payslip.hra = @sal.hra
+		@payslip.cca = @sal.cca
+
+		if @payslip.save
+			redirect_to payslip_path(@payslip)
+		else
+			@error = "Please check the data"
+			render "new"
+		end
+	end
+
+	def show
+		@payslip=Payslip.find(params[:id])
+		@user=User.find_by(id: @payslip.userid)
+		@acc=Account.find_by(id: @payslip.userid)
+		
+		@hrac = hrac(@payslip.basic, @payslip.hra)
+		@ccac = ccac(@payslip.basic, @payslip.cca) 
+		@gross = @payslip.basic + @hrac + @ccac + @payslip.reim + @payslip.ta + @payslip.sa
+		@ptc = ptc(@gross)
+		@lopc = lopc(@payslip.basic, @payslip.lop)
+		@deduction = @ptc + @lopc + @payslip.od
+		@net = @gross - @deduction
+		@salary_per_month = @net
+		temp = @payslip.month.to_i.humanize
+		dict = {"one" => "January", "two" => "Febraury", "three" => "March", "four" => "April", "five" => "May", "six" => "June", "seven" => "July", "eight" => "August", "nine" => "September", "ten" => "October", "eleven" => "November", "twelve" => "December"}
+		@temp = dict[temp]
+	end
+
+	private
+	
+	def payslip_params
+    	params.require(:payslip).permit(:hra, :cca, :basic, :pt, :sa, :ta, :reim,:lop , :od, :month, :year, :payslipid, :userid)
+    end
+
+    def hrac(basic, hra)
+    h = basic * (hra/100)
+    return h
+  	end
+
+  	def ccac(basic, cca)
+    c = basic * (cca/100)
+    return c
+  	end
+
+  	def ptc(spm)
+    pt = 0
+    if spm >= 15000
+      pt = 200
+    end 
+    return pt
+ 	end
+
+ 	def lopc(basic, lop)
+    l = (basic/30) * lop
+    return l
+  	end
+end
