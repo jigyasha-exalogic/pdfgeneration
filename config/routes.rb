@@ -7,9 +7,11 @@ Rails.application.routes.draw do
   get "/sals/:id/edit" => "sals#edit", as: "edit_sal"
   resources :accounts
   resources :payslips, only: [:create, :show]
+  delete '/destroy/:id' => "payslips#destroy", as: "destroy_payslip"
   get "/payslips/new/:id" => "payslips#new", as: "new_payslip"
   get "/payslips/:id/all" => "payslips#index", as: "show_all"
-  get "/jig/:id" => "payslips#show", as: "jig"
+  get "/success/:id" => "payslips#show", as: "success"
+  get "/payslips" => "users#index"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 end

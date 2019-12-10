@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_10_040654) do
+ActiveRecord::Schema.define(version: 2019_12_10_045926) do
 
   create_table "accounts", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -47,6 +47,9 @@ ActiveRecord::Schema.define(version: 2019_12_10_040654) do
     t.integer "pt", default: 0
     t.string "payslipid"
     t.integer "userid"
+    t.integer "gross", default: 0
+    t.integer "net", default: 0
+    t.integer "ctc", default: 0
   end
 
   create_table "sals", force: :cascade do |t|

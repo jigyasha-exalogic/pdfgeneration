@@ -66,13 +66,13 @@ text-align: left;
 <td>Basic Pay</td> 
 <td><%= @payslip.basic.to_i%></td>
 <td>Professional Tax</td>
-<td><%= @ptc.to_i%></td>
+<td><%= @payslip.pt.to_i%></td>
 </tr> 
 <tr> 
 <td>HRA</td> 
 <td><%= @payslip.hra.to_i%></td>
 <td>Loss of Pay</td>
-<td><%= @lopc.to_i%></td>
+<td><%= @payslip.lop.to_i%></td>
 <tr> 
 <td>CCA</td> 
 <td><%= @payslip.cca.to_i%></td>
@@ -90,7 +90,6 @@ text-align: left;
 <td><%= @payslip.ta.to_i%></td>
 <td></td>
 <td></td>
-
 </tr> 
 <tr> 
 <td>Reimbursement</td> 
@@ -100,17 +99,17 @@ text-align: left;
 
 </tr> 
 <tr> 
-<td style="font-weight: bold; text-decoration: underline;">Total Earnings</td> 
-<td><%= @gross.to_i%></td>
+<td style="font-weight: bold; text-decoration: underline;">Gross</td> 
+<td><%= (@payslip.gross+@payslip.reim).to_i%></td>
 <td style="font-weight: bold;text-decoration: underline;">Total Deductions</td>
-<td><%= @deduction.to_i%></td>
+<td><%= (@payslip.lop + @payslip.od + @payslip.pt).to_i%></td>
 
 </tr> 
 <tr> 
 <td ></td> 
 <td></td>
 <td style="font-weight: bold;text-decoration: underline;">Net Pay</td>
-<td><%= @net.to_i %></td> 
+<td><%= @payslip.net.to_i %></td> 
 
 </tr>
 </table>
@@ -121,7 +120,7 @@ text-align: left;
 <tr>
 <td>
 <strong style="text-decoration: underline;">Net Pay</strong> (in words):</td>
-<td>₹ <%=@net.to_i.humanize.capitalize %> only.</td>
+<td>₹ <%=@payslip.net.to_i.humanize.capitalize %> only.</td>
 </tr>
 </table>
 <br>
@@ -129,10 +128,12 @@ text-align: left;
 <center><p style="font-weight: bold; text-decoration: underline;">***This is system generated payslip and does not require signature</p></center>
 </body>
 </fieldset><br>
+<%= link_to "Back", show_all_path(@user), :class => "links" %>
   <script>
 function myFunction() {
 window.print();
 button.hide();
 }
 </script>
+
 <center><button onclick="myFunction()">Print this page</button></center>

@@ -13,11 +13,19 @@ class PayslipsController < ApplicationController
 		@sal = Sal.find(session[:copy])
 		@payslip.payslipid = @user.empid << @payslip.month.to_s.rjust(2,"0") << @payslip.year.to_s
 		@payslip.userid = @sal.id
-		@payslip.basic = @sal.basic
-		@payslip.hra = @sal.hra
-		@payslip.cca = @sal.cca
+		@payslip.basic = @payslip.gross / (1+(@sal.hra/100)+(@sal.cca/100)+(@sal.sa/100)+(@sal.ta/100))
+		@payslip.hra = @payslip.basic * (@sal.hra/100)
+		@payslip.cca = @payslip.basic * (@sal.cca/100)
+		@payslip.sa = @payslip.basic * (@sal.sa/100)
+		@payslip.ta = @payslip.basic * (@sal.ta/100)
+		if @payslip.gross >= 15000
+			@payslip.update(pt: 200)
+		end
+		temp = (@payslip.gross/30)*@payslip.lop
+		@payslip.update(lop: temp)
+		@payslip.net = (@payslip.gross - (@payslip.lop + @payslip.od + @payslip.pt))
 		if @payslip.save
-			redirect_to "/jig/" << (@payslip.id).to_s
+			redirect_to success_path(@payslip)
 		else
 			@error = "Payslip already generated"
 			render "new"
@@ -29,14 +37,6 @@ class PayslipsController < ApplicationController
 		@user=User.find_by(id: @payslip.userid)
 		@sal=Sal.find_by(id: @payslip.userid)
 		@acc=Account.find_by(id: @payslip.userid)
-		@payslip.hra = @payslip.basic * (@sal.hra/100)
-		@payslip.cca = @payslip.basic * (@sal.cca/100)
-		@gross = @payslip.basic + @payslip.hra + @payslip.cca + @payslip.reim + @payslip.ta + @payslip.sa
-		@ptc = ptc(@gross)
-		@lopc = lopc(@payslip.basic, @payslip.lop)
-		@deduction = @ptc + @lopc + @payslip.od
-		@net = @gross - @deduction
-		@salary_per_month = @net
 		temp = @payslip.month.to_i.humanize
 		dict = {"one" => "January", "two" => "Febraury", "three" => "March", "four" => "April", "five" => "May", "six" => "June", "seven" => "July", "eight" => "August", "nine" => "September", "ten" => "October", "eleven" => "November", "twelve" => "December"}
 		@temp = dict[temp]
@@ -53,10 +53,17 @@ class PayslipsController < ApplicationController
 		@payslips = Payslip.select(:id,:payslipid, :userid).where(:userid=>params[:id])
 	end
 
+	def destroy
+		@payslip=Payslip.find(params[:id])
+		user = User.find_by(id: @payslip.userid)
+		@payslip.delete
+		redirect_to show_all_path(user)
+	end
+
 	private
 	
 	def payslip_params
-    	params.require(:payslip).permit(:hra, :cca, :basic, :pt, :sa, :ta, :reim,:lop , :od, :month, :year, :payslipid, :userid)
+    	params.require(:payslip).permit(:gross,:net,:ctc,:hra, :cca, :basic, :pt, :sa, :ta, :reim,:lop , :od, :month, :year, :payslipid, :userid)
     end
 
   	def ptc(spm)
