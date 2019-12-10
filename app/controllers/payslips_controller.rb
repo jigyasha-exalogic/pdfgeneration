@@ -11,6 +11,7 @@ class PayslipsController < ApplicationController
 		@payslip = Payslip.new(payslip_params)
 		@user=User.find(session[:copy])
 		@sal = Sal.find(session[:copy])
+	 if @payslip.month > 0 && @payslip.year > 0
 		@payslip.payslipid = @user.empid << @payslip.month.to_s.rjust(2,"0") << @payslip.year.to_s
 		@payslip.userid = @sal.id
 		@payslip.basic = @payslip.gross / (1+(@sal.hra/100)+(@sal.cca/100)+(@sal.sa/100)+(@sal.ta/100))
@@ -30,6 +31,10 @@ class PayslipsController < ApplicationController
 			@error = "Payslip already generated"
 			render "new"
 		end
+     else
+     	@error = "Please enter valid month and year"
+     	render "new"
+     end
 	end
 
 	def show
