@@ -61,3 +61,4 @@ group :production do
 end
 gem 'prawn'
 gem 'prawn-table'
+gem "ifsc"

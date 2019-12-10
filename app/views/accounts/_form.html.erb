@@ -5,21 +5,17 @@
 <td colspan="2"><label><h3>Employee Name: <%= @user.fname %> <%= @user.lname %></h3></label></td>
 <tr>
   <td><%= f.label "Account Number: "%></td>
-    <td><%= f.number_field :acno, :required => true, :maxlength => 12 %> 
-    <span style="color:black;"><%= @sal.errors[:basic][0] rescue nil%></span>
+    <td><%= f.number_field :acno, :required => true, :maxlength => 12, :min => 0 %> 
+    <span style="color:black;"><%= @acc.errors[:acno][0] rescue nil%></span>
     <td><%= f.label "Account Holders Name: "%></td>
-    <td><%= f.text_field :acname, :required => true, :min => 0%>
+    <td><%= f.text_field :acname%>
   </tr>
   <tr>
     <td><%= f.label "IFSC Code: "%></td>
-    <td><%= f.text_field :ifsc, :required => true, :min => 0%> 
-     <span style="color:black;"><%= @sal.errors[:cca][0] rescue nil%></span>
-    <td><%= f.label "Bank Name:"%></td>
-    <td><%= f.text_field :bankname, :min => 0%>
+    <td><%= f.text_field :ifsc, :required => true, :maxlength => 11%> 
+      <span><%= @error %></span>
+     <span style="color:black;"><%= @acc.errors[:ifsc][0] rescue nil%></span>
   </tr>
-  <tr>
-    <td><%= f.label "Branch: "%></td>
-    <td><%= f.text_field :branch, :min => 0 %> 
 </table>
 <br>
 <%= link_to 'Home', "/users" , :class => "links"%> &nbsp;&nbsp;
