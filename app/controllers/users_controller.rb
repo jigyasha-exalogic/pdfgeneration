@@ -61,6 +61,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @sal = Sal.find(params[:id])
     @acc = Account.find(params[:id])
+    Payslip.where(userid: params[:id]).destroy_all
     @user.delete
     @sal.delete
     @acc.delete
