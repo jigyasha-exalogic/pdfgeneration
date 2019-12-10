@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_09_092023) do
+ActiveRecord::Schema.define(version: 2019_12_10_040654) do
 
   create_table "accounts", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 2019_12_09_092023) do
     t.integer "ta", default: 0
     t.integer "lop", default: 0
     t.integer "od", default: 0
-    t.decimal "month"
-    t.decimal "year"
+    t.integer "month"
+    t.integer "year"
     t.integer "pt", default: 0
     t.string "payslipid"
     t.integer "userid"
