@@ -54,7 +54,7 @@ class PayslipsPdf < Prawn::Document
     table_data = [[{content: "Employee ID",:font_style => :bold},@user.empid,{content:"Employee Name",:font_style => :bold},@acc.acname],
                   ["Department",@user.department,"Designation",@user.designation],
                   ["Date of Joining",@user.date_of_joining,"Account Number",@acc.acno],
-                  ["Bank",@acc.bankname<<", "<<@acc.branch,"IFSC Code",@acc.ifsc]]
+                  ["Bank",@acc.bankname,"IFSC Code",@acc.ifsc]]
     table(table_data, :width=>540, :cell_style => {:border_width => 0})
   end
 
