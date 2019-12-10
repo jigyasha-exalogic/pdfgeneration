@@ -101,17 +101,17 @@
 	<td><strong>Account Number:</strong></td>
 	<td><%= @acc.acno.to_i %></td>
 	<td><strong>Account Holder Name:</strong></td>
-	<td><%= @acc.acname %></td>
+	<td><%= @user.fname %> <%= @user.lname %></td>
   </tr>
    <tr>
 	<td><strong>IFSC Code:</strong></td>
-	<td><%= @acc.ifsc %></td>
+	<td><%= @acc.ifsc.upcase %></td>
 	<td><strong>Bank Name:</strong></td>
 	<td><%= @acc.bankname %></td>
   </tr>
    <tr>
 	<td><strong>Branch:</strong></td>
-	<td><%= @acc.branch %></td>
+	<td><%= @acc.branch.capitalize %></td>
   </tr>
 </table>
 <br>

@@ -7,8 +7,6 @@
   <td><%= f.label "Account Number: "%></td>
     <td><%= f.number_field :acno, :required => true, :maxlength => 12, :min => 0 %> 
     <span style="color:black;"><%= @acc.errors[:acno][0] rescue nil%></span>
-    <td><%= f.label "Account Holders Name: "%></td>
-    <td><%= f.text_field :acname%>
   </tr>
   <tr>
     <td><%= f.label "IFSC Code: "%></td>
