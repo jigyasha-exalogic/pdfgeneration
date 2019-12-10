@@ -82,6 +82,12 @@
 	<td><%= @user.emergency_number.to_i %></td>
   </tr>
    <td colspan="4" style="color: #3b5998;"><label><h3><b>PROFESSIONAL DETAILS</b></h3></label></td>
+   <tr>
+	<td><strong>Department:</strong></td>
+	<td><%= @user.department %></td>
+	<td><strong>Designation:</strong></td>
+	<td><%= @user.designation%></td>
+  </tr>
   <tr>
 	<td><strong>Primary Skill:</strong></td>
 	<td><%= @user.primary_skill %></td>
