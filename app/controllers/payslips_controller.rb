@@ -25,7 +25,7 @@ class PayslipsController < ApplicationController
 		@payslip.update(lop: temp)
 		@payslip.net = (@payslip.gross - (@payslip.lop + @payslip.od + @payslip.pt))
 		if @payslip.save
-			redirect_to success_path(@payslip)
+			redirect_to payslip_path(@payslip)
 		else
 			@error = "Payslip already generated"
 			render "new"
