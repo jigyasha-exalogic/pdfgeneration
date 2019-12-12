@@ -25,7 +25,7 @@ class SalsController < ApplicationController
     @user = User.find(params[:id])
   end
 
-   def update
+  def update
       @sal = Sal.find(params[:id])
       @user = User.find(params[:id])
       if @sal.update(sal_params)

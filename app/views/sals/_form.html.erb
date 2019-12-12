@@ -8,30 +8,30 @@
   <% end %>
 <table align = center, width=125%>
 <td colspan="2"><label><h3>Employee Name: <%= @user.fname %> <%= @user.lname %></h3></label></td>
-    <tr>
-      <td colspan="4" style="color: #3b5998;"><label><h4><b>ADDITIONS</b></h4></label></td>
+  <tr>
+    <td colspan="4" style="color: #3b5998;"><label><h4><b>ADDITIONS</b></h4></label></td>
   </tr>
+  <tr> 
     <td><%= f.label "HRA (in %) "%></td>
     <td><%= f.number_field :hra, :required => true, :min => 0%>
-    <span style="color:black;"><%= @sal.errors[:hra][0] rescue nil%></span>
+    <span style="color:black;"><%= @sal.errors[:hra][0] rescue nil%></span></td>
     <td><%= f.label "CCA (in %) "%></td>
-    <td><%= f.number_field :cca, :required => true, :min => 0%> 
-      
+    <td><%= f.number_field :cca, :required => true, :min => 0%> </td>
   </tr>
   <tr>
     <td><%= f.label "Special Allowance (in %) "%></td>
     <td><%= f.number_field :sa, :required => true, :min => 0%> 
     <span style="color:black;"><%= @sal.errors[:sa][0] rescue nil%></span></td> 
-     <td><%= f.label "Transport Allowance (in %) "%></td>
+    <td><%= f.label "Transport Allowance (in %) "%></td>
     <td><%= f.number_field :ta, :required => true, :min => 0%> 
     <span style="color:black;"><%= @sal.errors[:ta][0] rescue nil%></span></td> 
-   </tr>
+  </tr>
 </table>
 <br>
 <%= link_to 'Home', "/users" , :class => "links"%> &nbsp;&nbsp;
 <% if session[:temp] == "edit" %>
   <%= link_to 'Back', edit_user_path, :class => "links" %>&nbsp;&nbsp;
-  <% end %>
+<% end %>
 <%= f.submit 'Next', :class => "links"%>
 </fieldset>
 <% end %>

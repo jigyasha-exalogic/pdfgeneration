@@ -122,4 +122,3 @@ class UsersController < ApplicationController
     return l
   end
 end
-
